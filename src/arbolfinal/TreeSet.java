@@ -28,7 +28,7 @@ public class TreeSet<E extends Comparable<E>> extends AbstractSet<E> {
 
     // atributos de la clase
     private Node<E> root;
-    private int count, cont;
+    private int count, cont, HeightArb, HeightTem;
 
     // constructor del arbol
     public TreeSet() {
@@ -220,4 +220,56 @@ public class TreeSet<E extends Comparable<E>> extends AbstractSet<E> {
         return false;
     }
 
+    //Arbol Altura
+    public int HeightTree() {
+        HeightArb = 0;
+        HeightTree(root, HeightArb);
+        return HeightArb;
+    }
+
+    private void HeightTree(Node<E> r, int altura) {
+        if (r != null) {
+            HeightTree(r.left, altura + 1);
+            if (altura > HeightArb) {
+                HeightArb = altura;
+            }
+            HeightTree(r.right, altura + 1);
+        }
+    }
+    //Arbol Perfecto
+    public boolean isPerfect() {
+        return (isPerfect(root));
+    }
+
+    private boolean isPerfect(Node<E> r) {
+        if (r.left == null && r.right == null) {
+            HeightArb = 0;
+            HeightTem = 0;
+            HeightTree(root, HeightArb);
+            isPerAlt(root, HeightTem);
+            if (HeightArb != HeightTem) {
+                return false;
+            } else {
+                return true;
+            }
+
+            //return (isPerfect(r));
+        }
+
+        if (r.left != null && r.right != null) {
+            return (isPerfect(r.left) && isPerfect(r.right));
+        }
+
+        return false;
+    }
+
+    private void isPerAlt(Node<E> r, int altura) {
+        if (r != null) {
+            isPerAlt(r.left, altura + 1);
+            if (altura > HeightTem || altura < HeightTem) {
+                HeightTem = altura;
+            }
+            isPerAlt(r.right, altura + 1);
+        }
+    }
 }
