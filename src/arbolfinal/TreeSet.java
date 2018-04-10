@@ -184,5 +184,22 @@ public class TreeSet<E extends Comparable<E>> extends AbstractSet<E> {
             CanHojas(r.right);
         }
     }
+    //Metodo isFull
+    public boolean isFull(){
+        return(isFull(root));
+    }
+    
+    private boolean isFull(Node<E> r){
+        if(r == null)
+            return true;
+              
+        if(r.left == null && r.right == null)
+            return true;
+        
+        if(r.left != null && r.right != null)
+            return(isFull(r.left) && isFull(r.right));
+        
+        return false;
+    }
 
 }
