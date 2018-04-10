@@ -32,7 +32,7 @@ public class TreeSet<E extends Comparable<E>> extends AbstractSet<E> {
 	// atributos de la clase
 	
     private Node<E> root;
-    private int count;
+    private int count, cont;
     
 	// constructor del arbol
     public TreeSet() {
@@ -167,4 +167,22 @@ public class TreeSet<E extends Comparable<E>> extends AbstractSet<E> {
         root = null;
         count = 0;
     }
+    
+    //Contador de hojas
+    public int CantidadHojas() {
+        cont = 0;
+        CanHojas(root);
+        return cont;
+    }
+
+    private void CanHojas(Node<E> r) {
+        if (r != null) {
+            if (r.left == null && r.right == null) {
+                cont++;
+            }
+            CanHojas(r.left);
+            CanHojas(r.right);
+        }
+    }
+
 }
